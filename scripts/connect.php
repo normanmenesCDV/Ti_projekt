@@ -1,4 +1,3 @@
 <?php
-//echo "db";
-$conn = new mysqli("localhost", "root", "", "adminlte");
+	$conn = new mysqli("localhost", "root", "", "firma_projekt_ti");
 //echo $conn->connect_errno; // 0 -> OK
