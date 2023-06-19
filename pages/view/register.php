@@ -36,7 +36,7 @@ ERROR;
       <a href="./" class="h1"><b>Admin</b>LTE</a>
     </div>
     <div class="card-body">
-      <p class="login-box-msg">Register a new membership</p>
+      <p class="login-box-msg">Rejestracja użytkownika</p>
 
       <form action="../../scripts/register_user.php" method="post">
         <div class="input-group mb-3">
