@@ -1,0 +1,58 @@
+<!-- Modal szczegółów pracownika -->
+<div class="modal fade" id="modal-details">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Podgląd pracownika</h4>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form method="get" action="">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="inputLoginDetails">Login</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="inputLoginDetails"
+                  readonly
+                />
+                <br />
+                <label for="inputOsobaDetails">Osoba</label>
+                <select
+                  disabled
+                  class="form-control"
+                  id="inputOsobaDetails"
+                ></select>
+                <br />
+                <label for="inputRolaDetails">Rola</label>
+                <select
+                  disabled
+                  class="form-control"
+                  id="inputRolaDetails"
+                ></select>
+                <br />
+                <br />
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer justify-content-between">
+          <button type="button" class="btn btn-default" data-dismiss="modal">
+            Zamknij
+          </button>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->
+  

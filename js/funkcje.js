@@ -31,23 +31,44 @@ function addDzialyToSelect(input){
     return input;
 };
 
-function addSzefowieToSelect(input) {
+function addOsobyToSelect(input) {
     // Wywołaj żądanie AJAX do pobrania danych działów
-    var xhrSzefowie = new XMLHttpRequest();
-    xhrSzefowie.onload = function () {
-      if (xhrSzefowie.status === 200) {
-        var szefowie = JSON.parse(xhrSzefowie.responseText); // Przetwórz otrzymane dane JSON
+    var xhrOsoby = new XMLHttpRequest();
+    xhrOsoby.onload = function () {
+      if (xhrOsoby.status === 200) {
+        var osoby = JSON.parse(xhrOsoby.responseText); // Przetwórz otrzymane dane JSON
 
         // Utwórz opcje dla pola <select> na podstawie danych działów
-        szefowie.forEach(function (szef) {
+        osoby.forEach(function (osoba) {
           var option = document.createElement("option");
-          option.value = szef.Id;
-          option.textContent = szef.Nazwa;
+          option.value = osoba.Id;
+          option.textContent = osoba.Nazwa;
           input.appendChild(option);
         });
       }
     };
-    xhrSzefowie.open("GET", "../../scripts/pobierz_pracownika.php", true); // Plik powinien zwracać dane działów w formacie JSON
-    xhrSzefowie.send();
+    xhrOsoby.open("GET", "../../scripts/pobierz_pracownika.php", true); // Plik powinien zwracać dane działów w formacie JSON
+    xhrOsoby.send();
     return input;
 }
+
+function addRoleToSelect(input){
+    // Wywołaj żądanie AJAX do pobrania danych działów
+    var xhrRole = new XMLHttpRequest();
+    xhrRole.onload = function () {
+      if (xhrRole.status === 200) {
+        var role = JSON.parse(xhrRole.responseText); // Przetwórz otrzymane dane JSON
+    
+        // Utwórz opcje dla pola <select> na podstawie danych działów
+        role.forEach(function (rola) {
+          var option = document.createElement("option");
+          option.value = rola.Id;
+          option.textContent = rola.Nazwa;
+          input.appendChild(option);
+        });
+      }
+    };
+    xhrRole.open("GET", "../../scripts/pobierz_role.php", true); // Plik powinien zwracać dane działów w formacie JSON
+    xhrRole.send();
+    return input;
+};

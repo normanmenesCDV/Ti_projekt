@@ -1,6 +1,15 @@
 var detailsButtons = document.querySelectorAll(".button-details");
 var modalDetails = document.querySelector("#modal-details");
 var formDetails = modalDetails.querySelector("form");
+
+// Pobierz element <select> dla szefa
+var inputSzefDetails = formDetails.querySelector("#inputSzefDetails");
+inputSzefDetails = addOsobyToSelect(inputSzefDetails);
+
+// Pobierz element <select> dla działu
+var inputDzialDetails = formDetails.querySelector("#inputDzialDetails");
+inputDzialDetails = addDzialyToSelect(inputDzialDetails);
+
 // Iteruj przez wszystkie przyciski "Szczegóły"
 detailsButtons.forEach(function (button) {
   button.addEventListener("click", function () {
@@ -14,23 +23,12 @@ detailsButtons.forEach(function (button) {
 
         /// Uzupełnij pola formularza danymi pracownika
         formDetails.querySelector("#inputImieDetails").value = pracownikDetails.Imie;
-        formDetails.querySelector("#inputNazwiskoDetails").value =
-        pracownikDetails.Nazwisko;
-        formDetails.querySelector("#inputDataUrodzeniaDetails").value =
-        pracownikDetails.Data_Urodzenia;
-        formDetails.querySelector("#inputTelefonDetails").value =
-        pracownikDetails.Telefon;
+        formDetails.querySelector("#inputNazwiskoDetails").value = pracownikDetails.Nazwisko;
+        formDetails.querySelector("#inputDataUrodzeniaDetails").value = pracownikDetails.Data_Urodzenia;
+        formDetails.querySelector("#inputTelefonDetails").value = pracownikDetails.Telefon;
         formDetails.querySelector("#inputMailDetails").value = pracownikDetails.Mail;
         formDetails.querySelector("#inputAdresDetails").value = pracownikDetails.Adres;
-
-        // Pobierz element <select> dla szefa
-        var inputSzefDetails = formDetails.querySelector("#inputSzefDetails");
-        inputSzefDetails = addSzefowieToSelect(inputSzefDetails);
         inputSzefDetails.value = pracownikDetails.Szef_Id;
-
-        // Pobierz element <select> dla działu
-        var inputDzialDetails = formDetails.querySelector("#inputDzialDetails");
-        inputDzialDetails = addDzialyToSelect(inputDzialDetails);
         inputDzialDetails.value = pracownikDetails.Dzial_Id;
       }
     };

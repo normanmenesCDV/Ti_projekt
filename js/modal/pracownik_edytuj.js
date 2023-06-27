@@ -13,6 +13,14 @@ var formEdit = modalEdit.querySelector("form");
 // Pobierz przycisk "Zapisz zmiany"
 var saveButton = modalEdit.querySelector(".btn-primary");
 
+// Pobierz element <select> dla szefa
+var inputSzefEdit = formEdit.querySelector("#inputSzefEdit");
+inputSzefEdit = addOsobyToSelect(inputSzefEdit);
+
+// Pobierz element <select> dla działu
+var inputDzialEdit = formEdit.querySelector("#inputDzialEdit");
+inputDzialEdit = addDzialyToSelect(inputDzialEdit);
+
 // Utwórz funkcję obsługującą zdarzenie kliknięcia przycisku "Zapisz zmiany"
 saveButton.addEventListener("click", function () {
   // Pobierz wartości pól formularza
@@ -131,15 +139,7 @@ editButtons.forEach(function (button) {
         formEdit.querySelector("#inputTelefonEdit").value = pracownikEdit.Telefon;
         formEdit.querySelector("#inputMailEdit").value = pracownikEdit.Mail;
         formEdit.querySelector("#inputAdresEdit").value = pracownikEdit.Adres;
-
-        // Pobierz element <select> dla szefa
-        var inputSzefEdit = formEdit.querySelector("#inputSzefEdit");
-        inputSzefEdit = addSzefowieToSelect(inputSzefEdit);
         inputSzefEdit.value = pracownikEdit.Szef_Id;
-
-        // Pobierz element <select> dla działu
-        var inputDzialEdit = formEdit.querySelector("#inputDzialEdit");
-        inputDzialEdit = addDzialyToSelect(inputDzialEdit);
         inputDzialEdit.value = pracownikEdit.Dzial_Id;
         
       }

@@ -15,7 +15,7 @@ var saveButton = modalAdd.querySelector(".btn-primary");
 
 // Pobierz element <select> dla szefa
 var inputSzefAdd = formAdd.querySelector("#inputSzefAdd");
-inputSzefAdd = addSzefowieToSelect(inputSzefAdd);
+inputSzefAdd = addOsobyToSelect(inputSzefAdd);
 
 // Pobierz element <select> dla działu
 var inputDzialAdd = formAdd.querySelector("#inputDzialAdd");
