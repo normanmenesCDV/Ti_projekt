@@ -1,0 +1,67 @@
+<!-- Modal dodawania pracownika -->
+<div class="modal fade" id="modal-add">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Dodawanie pracownika</h4>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form method="post" action="../../script/edytuj_pracownika.php">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="inputImieAdd">Imię</label>
+              <input type="text" class="form-control" id="inputImieAdd" />
+              <br />
+              <label for="inputNazwiskoAdd">Nazwisko</label>
+              <input type="text" class="form-control" id="inputNazwiskoAdd" />
+              <br />
+              <label for="inputDataUrodzeniaAdd">Data urodzenia</label>
+              <input
+                type="date"
+                class="form-control"
+                id="inputDataUrodzeniaAdd"
+              />
+              <br />
+              <label for="inputTelefonAdd">Telefon</label>
+              <input type="tel" class="form-control" id="inputTelefonAdd" />
+              <br />
+              <label for="inputMailAdd">Mail</label>
+              <input type="email" class="form-control" id="inputMailAdd" />
+              <br />
+              <label for="inputAdresAdd">Adres</label>
+              <input type="text" class="form-control" id="inputAdresAdd" />
+              <br />
+              <label for="inputSzefAdd">Szef</label>
+              <select class="form-control" id="inputSzefAdd">
+                <option></option>
+              </select>
+              <br />
+              <label for="inputDzialAdd">Dział</label>
+              <select class="form-control" id="inputDzialAdd">
+                <option></option>
+              </select>
+              <br />
+            </div>
+          </div>
+        </form>
+        <div id="messageAdd"></div>
+      </div>
+      <div class="modal-footer justify-content-between">
+        <button type="button" class="btn btn-default" data-dismiss="modal">
+          Anuluj
+        </button>
+        <button type="button" class="btn btn-primary">Dodaj</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>

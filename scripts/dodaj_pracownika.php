@@ -1,6 +1,5 @@
 <?php
 // Pobierz wartości przesłane przez żądanie POST
-$pracownikId = $_POST['pracownikId'];
 $imie = $_POST['imie'];
 $nazwisko = $_POST['nazwisko'];
 $dataUrodzenia = $_POST['dataUrodzenia'];
@@ -9,9 +8,6 @@ $mail = $_POST['mail'];
 $adres = $_POST['adres'];
 $szefId = $_POST['szefId'];
 $dzialId = $_POST['dzialId'];
-
-// Sprawdź i zabezpiecz wartość identyfikatora użytkownika (np. przed atakami SQL Injection)
-$pracownikId = intval($pracownikId);
 
 // Utwórz połączenie z bazą danych
 require_once "./connect.php";
@@ -32,11 +28,11 @@ function emptyToNull($value) {
   $dzialId = emptyToNull($dzialId);
 
 // Wykonaj zapytanie SQL, aby zaktualizować dane użytkownika
-$stmt = $conn->prepare("UPDATE `pracownicy` SET Imie = ?, Nazwisko = ?, Data_Urodzenia = ?, Telefon = ?, Mail = ?, Adres = ?, Szef_Id = ?, Dzial_Id = ? WHERE Id = ?");
+$stmt = $conn->prepare("INSERT INTO `pracownicy` (Imie, Nazwisko, Data_Urodzenia, Telefon, Mail, Adres, Szef_Id, Dzial_Id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 
 // Przypisz wartości do parametrów
 $stmt->bind_param(
-  "ssssssiii",
+  "ssssssii",
   $imie,
   $nazwisko,
   $dataUrodzenia,
@@ -44,17 +40,16 @@ $stmt->bind_param(
   $mail,
   $adres,
   $szefId,
-  $dzialId,
-  $pracownikId
+  $dzialId
 );
     
 // Wykonaj zapytanie
 if ($stmt->execute()) {
   // Aktualizacja zakończona sukcesem
-  echo "Dane pracownika zostały zaktualizowane.";
+  echo "Dodano pracownika.";
 } else {
   // Wystąpił błąd podczas aktualizacji
-  echo "Błąd podczas aktualizacji danych pracownika: " . $stmt->error;
+  echo "Błąd podczas dodawania pracownika: " . $stmt->error;
 }
 
 // Zamknij połączenie z bazą danych

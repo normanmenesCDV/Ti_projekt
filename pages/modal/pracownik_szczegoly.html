@@ -1,0 +1,98 @@
+<!-- Modal szczegółów pracownika -->
+<div class="modal fade" id="modal-details">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Podgląd pracownika</h4>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form method="get" action="">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="inputImieDetails">Imię</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="inputImieDetails"
+                  readonly
+                />
+                <br />
+                <label for="inputNazwiskoDetails">Nazwisko</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="inputNazwiskoDetails"
+                  readonly
+                />
+                <br />
+                <label for="inputDataUrodzeniaDetails">Data urodzenia</label>
+                <input
+                  type="date"
+                  class="form-control"
+                  id="inputDataUrodzeniaDetails"
+                  readonly
+                />
+                <br />
+                <label for="inputTelefonDetails">Telefon</label>
+                <input
+                  type="tel"
+                  class="form-control"
+                  id="inputTelefonDetails"
+                  readonly
+                />
+                <br />
+                <label for="inputMailDetails">Mail</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="inputMailDetails"
+                  readonly
+                />
+                <br />
+                <label for="inputAdresDetails">Adres</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="inputAdresDetails"
+                  readonly
+                />
+                <br />
+                <label for="inputSzefDetails">Szef</label>
+                <select
+                  disabled
+                  class="form-control"
+                  id="inputSzefDetails"
+                ></select>
+                <br />
+                <label for="inputDzialDetails">Dział</label>
+                <select
+                  disabled
+                  class="form-control"
+                  id="inputDzialDetails"
+                ></select>
+                <br />
+                <br />
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer justify-content-between">
+          <button type="button" class="btn btn-default" data-dismiss="modal">
+            Zamknij
+          </button>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->
+  

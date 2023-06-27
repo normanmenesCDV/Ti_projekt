@@ -1,0 +1,68 @@
+<!-- Modal edycji pracownika -->
+<div class="modal fade" id="modal-edit">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Edycja pracownika</h4>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form method="post" action="../../script/edytuj_pracownika.php">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="inputImieEdit">Imię</label>
+                <input type="text" class="form-control" id="inputImieEdit" />
+                <br />
+                <label for="inputNazwiskoEdit">Nazwisko</label>
+                <input type="text" class="form-control" id="inputNazwiskoEdit" />
+                <br />
+                <label for="inputDataUrodzeniaEdit">Data urodzenia</label>
+                <input
+                  type="date"
+                  class="form-control"
+                  id="inputDataUrodzeniaEdit"
+                />
+                <br />
+                <label for="inputTelefonEdit">Telefon</label>
+                <input type="tel" class="form-control" id="inputTelefonEdit" />
+                <br />
+                <label for="inputMailEdit">Mail</label>
+                <input type="email" class="form-control" id="inputMailEdit" />
+                <br />
+                <label for="inputAdresEdit">Adres</label>
+                <input type="text" class="form-control" id="inputAdresEdit" />
+                <br />
+                <label for="inputSzefEdit">Szef</label>
+                <select class="form-control" id="inputSzefEdit">
+                  <option></option>
+                </select>
+                <br />
+                <label for="inputDzialEdit">Dział</label>
+                <select class="form-control" id="inputDzialEdit">
+                  <option></option>
+                </select>
+                <br />
+              </div>
+            </div>
+          </form>
+          <div id="messageEdit"></div>
+        </div>
+        <div class="modal-footer justify-content-between">
+          <button type="button" class="btn btn-default" data-dismiss="modal">
+            Anuluj
+          </button>
+          <button type="button" class="btn btn-primary">Zapisz zmiany</button>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  

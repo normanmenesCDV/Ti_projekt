@@ -245,6 +245,11 @@
         </div>
       </div><!-- /.container-fluid -->
     </section>
+    <button class="button-add" data-toggle="modal" data-target="#modal-add">
+      <i class="fas fa-plus" style="margin-right: 5px;"></i>
+      <span style="flex: 1;">Dodaj</span>
+    </button>
+
 
     <!-- Main content -->
     <section class="content">
@@ -302,112 +307,19 @@
     </section>
     <!-- /.content -->
   </div>
-<!-- Modal szczegółów pracownika -->
-<div class="modal fade" id="modal-details">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">Podgląd pracownika</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      <form method="get" action="">
-        <div class="col-sm-6">
-          <div class="form-group">
-            <label for="inputImieDetails">Imię</label>
-            <input type="text" class="form-control" id="inputImieDetails" readonly>
-            <br/>
-            <label for="inputNazwiskoDetails">Nazwisko</label>
-            <input type="text" class="form-control" id="inputNazwiskoDetails" readonly>
-            <br/>
-            <label for="inputDataUrodzeniaDetails">Data urodzenia</label>
-            <input type="date" class="form-control" id="inputDataUrodzeniaDetails" readonly>
-            <br/>
-            <label for="inputTelefonDetails">Telefon</label>
-            <input type="tel" class="form-control" id="inputTelefonDetails" readonly>
-            <br/>
-            <label for="inputMailDetails">Mail</label>
-            <input type="email" class="form-control" id="inputMailDetails" readonly>
-            <br/>
-            <label for="inputAdresDetails">Adres</label>
-            <input type="text" class="form-control" id="inputAdresDetails" readonly>
-            <br/>
-            <label for="inputSzefDetails">Szef</label>
-            <select disabled class="form-control" id="inputSzefDetails"></select>
-            <br/>
-            <label for="inputDzialDetails">Dział</label>
-            <select disabled class="form-control" id="inputDzialDetails"></select>
-            <br/>
-            <br/>
-          </div>
-        </div>
-      </form>
-      </div>
-      <div class="modal-footer justify-content-between">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Zamknij</button>
-      </div>
-    </div>
-    <!-- /.modal-content -->
-  </div>
-  <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
 
-  <!-- Modal edycji pracownika -->
-  <div class="modal fade" id="modal-edit">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">Edycja pracownika</h4>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form method="post" action="../../script/edytuj_pracownika.php">
-          <div class="col-sm-6">
-            <div class="form-group">
-            <label for="inputImieEdit">Imię</label>
-            <input type="text" class="form-control" id="inputImieEdit">
-            <br/>
-            <label for="inputNazwiskoEdit">Nazwisko</label>
-            <input type="text" class="form-control" id="inputNazwiskoEdit">
-            <br/>
-            <label for="inputDataUrodzeniaEdit">Data urodzenia</label>
-            <input type="date" class="form-control" id="inputDataUrodzeniaEdit">
-            <br/>
-            <label for="inputTelefonEdit">Telefon</label>
-            <input type="tel" class="form-control" id="inputTelefonEdit">
-            <br/>
-            <label for="inputMailEdit">Mail</label>
-            <input type="email" class="form-control" id="inputMailEdit">
-            <br/>
-            <label for="inputAdresEdit">Adres</label>
-            <input type="text" class="form-control" id="inputAdresEdit">
-            <br/>
-            <label for="inputSzefEdit">Szef</label>
-            <select class="form-control" id="inputSzefEdit"></select>
-            <br/>
-            <label for="inputDzialEdit">Dział</label>
-            <select class="form-control" id="inputDzialEdit"></select>
-            <br/>
-            </div>
-          </div>
-          </form>
-        </div>
-        <div class="modal-footer justify-content-between">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Anuluj</button>
-          <button type="button" class="btn btn-primary">Zapisz zmiany</button>
-          </form>
-        </div>
-      </div>
-      <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-  </div>
-  <!-- /.modal -->
+
+<!-- Modale -->
+<?php include '../modal/pracownik_szczegoly.html'; ?>
+<?php include '../modal/pracownik_edytuj.html'; ?>
+<?php include '../modal/pracownik_dodaj.html'; ?>
+
+<script src="../../js/funkcje.js"></script>
+<script src="../../js/modal/pracownik_szczegoly.js"></script>
+<script src="../../js/modal/pracownik_edytuj.js"></script>
+<script src="../../js/modal/pracownik_dodaj.js"></script>
+<!-- /.Modale -->
+ 
   <!-- /.content-wrapper -->
   <footer class="main-footer">
     <div class="float-right d-none d-sm-block">
@@ -423,163 +335,6 @@
   <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
-
-<!-- Skrypt do modala szczegółów -->
-<script>
-  var detailsButtons = document.querySelectorAll('.button-details');
-  var modalDetails = document.querySelector('#modal-details');
-  var formDetails = modalDetails.querySelector('form');
-  // Iteruj przez wszystkie przyciski "Szczegóły"
-  detailsButtons.forEach(function(button) {
-    button.addEventListener('click', function() {
-      var pracownikId = button.dataset.pracownikId; // Pobierz ID pracownika z atrybutu danych
-
-      // Wywołaj żądanie AJAX do pobrania danych pracownika
-      var xhr = new XMLHttpRequest();
-      xhr.onload = function() {
-        if (xhr.status === 200) {
-          var pracownik = JSON.parse(xhr.responseText); // Przetwórz otrzymane dane JSON
-          
-          /// Uzupełnij pola formularza danymi pracownika
-          formDetails.querySelector('#inputImieDetails').value = pracownik.Imie;
-          formDetails.querySelector('#inputNazwiskoDetails').value = pracownik.Nazwisko;
-          formDetails.querySelector('#inputDataUrodzeniaDetails').value = pracownik.Data_Urodzenia;
-          formDetails.querySelector('#inputTelefonDetails').value = pracownik.Telefon;
-          formDetails.querySelector('#inputMailDetails').value = pracownik.Mail;
-          formDetails.querySelector('#inputAdresDetails').value = pracownik.Adres;
-
-          // Pobierz element <select> dla szefa
-          var inputSzefDetails = formDetails.querySelector('#inputSzefDetails');
-
-          // Wywołaj żądanie AJAX do pobrania danych działów
-          var xhrSzefowie = new XMLHttpRequest();
-          xhrSzefowie.onload = function() {
-            if (xhrSzefowie.status === 200) {
-              var szefowie = JSON.parse(xhrSzefowie.responseText); // Przetwórz otrzymane dane JSON
-            
-              // Utwórz opcje dla pola <select> na podstawie danych działów
-              szefowie.forEach(function(szef) {
-                var option = document.createElement('option');
-                option.value = szef.Id;
-                option.textContent = szef.Nazwa;
-                inputSzefDetails.appendChild(option);
-              });
-            
-              // Ustaw wartość pola <select> na ID szefa pracownika
-              inputSzefDetails.value = pracownik.Szef_Id;
-            }
-          };
-          xhrSzefowie.open('GET', '../../scripts/pobierz_pracownika.php', true); // Plik powinien zwracać dane działów w formacie JSON
-          xhrSzefowie.send();
-
-          // Pobierz element <select> dla działu
-          var inputDzialDetails = formDetails.querySelector('#inputDzialDetails');
-
-          // Wywołaj żądanie AJAX do pobrania danych działów
-          var xhrDzialy = new XMLHttpRequest();
-          xhrDzialy.onload = function() {
-            if (xhrDzialy.status === 200) {
-              var dzialy = JSON.parse(xhrDzialy.responseText); // Przetwórz otrzymane dane JSON
-            
-              // Utwórz opcje dla pola <select> na podstawie danych działów
-              dzialy.forEach(function(dzial) {
-                var option = document.createElement('option');
-                option.value = dzial.Id;
-                option.textContent = dzial.Nazwa;
-                inputDzialDetails.appendChild(option);
-              });
-            
-              // Ustaw wartość pola <select> na ID działu pracownika
-              inputDzialDetails.value = pracownik.Dzial_Id;
-            }
-          };
-          xhrDzialy.open('GET', '../../scripts/pobierz_dzialy.php', true); // Plik powinien zwracać dane działów w formacie JSON
-          xhrDzialy.send();
-        }
-      };
-      xhr.open('GET', '../../scripts/pobierz_dane_pracownika.php?pracownikId=' + pracownikId, true);
-      xhr.send();
-    });
-  });
-</script>
-<!-- Skrypt do modala edycji -->
-<script>
-  var editButtons = document.querySelectorAll('.button-edit');
-  var modalEdit = document.querySelector('#modal-edit');
-  var formEdit = modalEdit.querySelector('form');
-  // Iteruj przez wszystkie przyciski "Edytuj"
-  editButtons.forEach(function(button) {
-    button.addEventListener('click', function() {
-      var pracownikId = button.dataset.pracownikId; // Pobierz ID pracownika z atrybutu danych
-      
-      // Wywołaj żądanie AJAX do pobrania danych pracownika
-      var xhr = new XMLHttpRequest();
-      xhr.onload = function() {
-        if (xhr.status === 200) {
-          var pracownik = JSON.parse(xhr.responseText); // Przetwórz otrzymane dane JSON
-          
-          // Uzupełnij pola formularza danymi pracownika
-          formEdit.querySelector('#inputImieEdit').value = pracownik.Imie;
-          formEdit.querySelector('#inputNazwiskoEdit').value = pracownik.Nazwisko;
-          formEdit.querySelector('#inputDataUrodzeniaEdit').value = pracownik.Data_Urodzenia;
-          formEdit.querySelector('#inputTelefonEdit').value = pracownik.Telefon;
-          formEdit.querySelector('#inputMailEdit').value = pracownik.Mail;
-          formEdit.querySelector('#inputAdresEdit').value = pracownik.Adres;
-
-          // Pobierz element <select> dla szefa
-          var inputSzefEdit = formEdit.querySelector('#inputSzefEdit');
-
-          // Wywołaj żądanie AJAX do pobrania danych działów
-          var xhrSzefowie = new XMLHttpRequest();
-          xhrSzefowie.onload = function() {
-            if (xhrSzefowie.status === 200) {
-              var szefowie = JSON.parse(xhrSzefowie.responseText); // Przetwórz otrzymane dane JSON
-            
-              // Utwórz opcje dla pola <select> na podstawie danych działów
-              szefowie.forEach(function(szef) {
-                var option = document.createElement('option');
-                option.value = szef.Id;
-                option.textContent = szef.Nazwa;
-                inputSzefEdit.appendChild(option);
-              });
-            
-              // Ustaw wartość pola <select> na ID szefa pracownika
-              inputSzefEdit.value = pracownik.Szef_Id;
-            }
-          };
-          xhrSzefowie.open('GET', '../../scripts/pobierz_pracownika.php', true); // Plik powinien zwracać dane działów w formacie JSON
-          xhrSzefowie.send();
-
-          // Pobierz element <select> dla działu
-          var inputDzialEdit = formEdit.querySelector('#inputDzialEdit');
-
-          // Wywołaj żądanie AJAX do pobrania danych działów
-          var xhrDzialy = new XMLHttpRequest();
-          xhrDzialy.onload = function() {
-            if (xhrDzialy.status === 200) {
-              var dzialy = JSON.parse(xhrDzialy.responseText); // Przetwórz otrzymane dane JSON
-            
-              // Utwórz opcje dla pola <select> na podstawie danych działów
-              dzialy.forEach(function(dzial) {
-                var option = document.createElement('option');
-                option.value = dzial.Id;
-                option.textContent = dzial.Nazwa;
-                inputDzialEdit.appendChild(option);
-              });
-            
-              // Ustaw wartość pola <select> na ID działu pracownika
-              inputDzialEdit.value = pracownik.Dzial_Id;
-            }
-          };
-          xhrDzialy.open('GET', '../../scripts/pobierz_dzialy.php', true); // Plik powinien zwracać dane działów w formacie JSON
-          xhrDzialy.send();
-        }
-      };
-      xhr.open('GET', '../../scripts/pobierz_dane_pracownika.php?pracownikId=' + pracownikId, true);
-      xhr.send();
-    });
-  });
-</script>
 
 <!-- jQuery -->
 <script src="../../plugins/jquery/jquery.min.js"></script>
