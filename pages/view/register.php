@@ -36,11 +36,19 @@ ERROR;
       <a href="./" class="h1"><b>Admin</b>LTE</a>
     </div>
     <div class="card-body">
-      <p class="login-box-msg">Rejestracja użytkownika</p>
+      <p class="login-box-msg">Register a new membership</p>
 
       <form action="../../scripts/register_user.php" method="post">
+          <div class="input-group mb-3">
+              <input type="text" class="form-control" placeholder="Podaj Login" name="Login" autofocus>
+              <div class="input-group-append">
+                  <div class="input-group-text">
+                      <span class="fas fa-user"></span>
+                  </div>
+              </div>
+          </div>
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Podaj imię" name="firstName" autofocus>
+          <input type="text" class="form-control" placeholder="Podaj imię" name="Imie" autofocus>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
@@ -49,7 +57,7 @@ ERROR;
         </div>
 
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Podaj nazwisko" name="lastName" autofocus>
+          <input type="text" class="form-control" placeholder="Podaj nazwisko" name="Nazwisko" autofocus>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
@@ -58,7 +66,7 @@ ERROR;
         </div>
 
         <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="Podaj email" name="email">
+          <input type="email" class="form-control" placeholder="Podaj email" name="Mail">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -67,70 +75,7 @@ ERROR;
         </div>
 
         <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="Potwierdź email" name="confirm_email">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-envelope"></span>
-            </div>
-          </div>
-        </div>
-
-        <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="Podaj dodatkowy email" name="additional_email">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-envelope"></span>
-            </div>
-          </div>
-        </div>
-
-        <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="Potwierdź dodatkowy email" name="additional_confirm_email">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-envelope"></span>
-            </div>
-          </div>
-        </div>
-
-        <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Podaj hasło" name="pass">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-lock"></span>
-            </div>
-          </div>
-        </div>
-
-        <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Potwierdź hasło" name="confirm_pass">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-lock"></span>
-            </div>
-          </div>
-        </div>
-
-        <div class="input-group mb-3">
-          <input type="date" class="form-control" name="birthday">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-lock"></span>
-            </div>
-          </div>
-        </div>
-
-        <div class="input-group mb-3">
-          <select class="form-control" name="city_id">
-          <?php
-            require_once "../../scripts/connect.php";
-            $sql = "SELECT * FROM cities";
-            $result = $conn->query($sql);
-            while($city = $result->fetch_assoc()){
-              echo "<option value='$city[id]'>$city[city]</option>";
-            }
-          ?>
-          </select>
+          <input type="password" class="form-control" placeholder="Podaj hasło" name="Haslo">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -155,18 +100,7 @@ ERROR;
         </div>
       </form>
 
-      <div class="social-auth-links text-center">
-        <a href="#" class="btn btn-block btn-primary">
-          <i class="fab fa-facebook mr-2"></i>
-          Sign up using Facebook
-        </a>
-        <a href="#" class="btn btn-block btn-danger">
-          <i class="fab fa-google-plus mr-2"></i>
-          Sign up using Google+
-        </a>
-      </div>
-
-      <a href="./" class="text-center">I already have a membership</a>
+      <a href="Login_page.php" class="text-center">I already have a membership</a>
     </div>
     <!-- /.form-box -->
   </div><!-- /.card -->
