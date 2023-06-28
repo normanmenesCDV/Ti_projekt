@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 27 Cze 2023, 22:28
+-- Czas generowania: 28 Cze 2023, 02:28
 -- Wersja serwera: 10.4.24-MariaDB
 -- Wersja PHP: 7.4.29
 
@@ -56,29 +56,29 @@ INSERT INTO `dzialy` (`Id`, `Nazwa`) VALUES
 
 CREATE TABLE `godziny_pracownikow` (
   `id` int(11) NOT NULL,
-  `imie` varchar(50) NOT NULL,
-  `nazwisko` varchar(50) NOT NULL,
+  `Pracownik_Id` int(11) NOT NULL,
   `data` date NOT NULL,
   `godziny` int(11) NOT NULL,
   `komentarz` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `godziny_pracownikow`
+-- Zrzut danych tabeli `godziny_pracownikow`
 --
 
-INSERT INTO `godziny_pracownikow` (`id`, `imie`, `nazwisko`, `data`, `godziny`, `komentarz`) VALUES
-(24, 'wojciech', 'janicki', '2023-06-27', 5, ''),
-(25, 'wojciech', 'janicki', '2023-06-27', 5, ''),
-(26, 'wrgw', 'grwgw', '2023-06-22', 4, ''),
-(27, 'wrgw', 'grwgw', '2023-06-22', 4, 'rqerqgfqergqerghqhq'),
-(28, 'wrgw', 'grwgw', '2023-06-22', 4, 'rqerqgfqergqerghqhq'),
-(29, 'wrgw', 'grwgw', '2023-06-22', 4, 'rqerqgfqergqerghqhq'),
-(30, 'wrgw', 'grwgw', '2023-06-22', 4, 'rqerqgfqergqerghqhq'),
-(31, 'wrgw', 'grwgw', '2023-06-22', 4, 'rqerqgfqergqerghqhq'),
-(32, 'Norman', 'Menes', '2023-06-27', 6, 'Zwolniony z dwóch ostanich wizyt z powodu wizyty u lekarza'),
-(33, 'dada', 'dwadwa', '2023-06-28', 43, 'fafadsf'),
-(34, 'dada', 'dwadwa', '2023-06-28', 43, 'fafadsf');
+INSERT INTO `godziny_pracownikow` (`id`, `Pracownik_Id`, `data`, `godziny`, `komentarz`) VALUES
+(24, 2, '2023-06-27', 5, ''),
+(25, 1, '2023-06-27', 5, ''),
+(26, 5, '2023-06-22', 4, ''),
+(27, 9, '2023-06-22', 4, 'rqerqgfqergqerghqhq'),
+(28, 3, '2023-06-22', 4, 'rqerqgfqergqerghqhq'),
+(29, 8, '2023-06-22', 4, 'rqerqgfqergqerghqhq'),
+(30, 25, '2023-06-22', 4, 'rqerqgfqergqerghqhq'),
+(31, 2, '2023-06-22', 4, 'rqerqgfqergqerghqhq'),
+(32, 1, '2023-06-27', 6, 'Zwolniony z dwóch ostanich wizyt z powodu wizyty u lekarza'),
+(33, 7, '2023-06-28', 43, 'fafadsf'),
+(34, 15, '2023-06-28', 43, 'fafadsf'),
+(41, 1, '2023-06-28', 10, 'dużo pracował nad projektem');
 
 -- --------------------------------------------------------
 
@@ -170,17 +170,16 @@ CREATE TABLE `uzytkownicy` (
   `Rola_Id` int(11) NOT NULL DEFAULT 3,
   `Pracownik_Id` int(11) DEFAULT NULL,
   `Aktywowane` int(1) NOT NULL,
-  `TokenAktywacyjny` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `TokenAktywacyjny` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Zrzut danych tabeli `uzytkownicy`
 --
 
 INSERT INTO `uzytkownicy` (`Id`, `Login`, `Haslo`, `Rola_Id`, `Pracownik_Id`, `Aktywowane`, `TokenAktywacyjny`) VALUES
-(14, 'Kacper009', '$2y$10$HCXoBOPHAKTrwG24Vo8SYulMOkcD6i4kydafuKSCLdhay2JIj3UpC', 1, NULL, 0, '6499dad8e91dc');
-
--- --------------------------------------------------------
+(14, 'Kacper009', '$2y$10$HCXoBOPHAKTrwG24Vo8SYulMOkcD6i4kydafuKSCLdhay2JIj3UpC', 1, 7, 0, '6499dad8e91dc'),
+(17, 'malgorzata_kaminska', '$2y$10$KaqyJjRBTNGfHnDYQaX8IOx12gORCW4OxNrW7obZI.rC3e6zjZy3G', 2, 10, 0, NULL);
 
 --
 -- Indeksy dla zrzutów tabel
@@ -196,7 +195,8 @@ ALTER TABLE `dzialy`
 -- Indeksy dla tabeli `godziny_pracownikow`
 --
 ALTER TABLE `godziny_pracownikow`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_GodzinyPracownikow_Pracownicy` (`Pracownik_Id`);
 
 --
 -- Indeksy dla tabeli `pracownicy`
@@ -231,10 +231,10 @@ ALTER TABLE `dzialy`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT for table `godziny_pracownikow`
+-- AUTO_INCREMENT dla tabeli `godziny_pracownikow`
 --
 ALTER TABLE `godziny_pracownikow`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT dla tabeli `pracownicy`
@@ -252,11 +252,17 @@ ALTER TABLE `role`
 -- AUTO_INCREMENT dla tabeli `uzytkownicy`
 --
 ALTER TABLE `uzytkownicy`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- Ograniczenia dla zrzutów tabel
 --
+
+--
+-- Ograniczenia dla tabeli `godziny_pracownikow`
+--
+ALTER TABLE `godziny_pracownikow`
+  ADD CONSTRAINT `fk_GodzinyPracownikow_Pracownicy` FOREIGN KEY (`Pracownik_Id`) REFERENCES `pracownicy` (`Id`);
 
 --
 -- Ograniczenia dla tabeli `pracownicy`

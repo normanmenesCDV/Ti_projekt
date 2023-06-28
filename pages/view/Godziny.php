@@ -1,22 +1,13 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "firma_projekt_ti";
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Błąd połączenia: " . $conn->connect_error);
-}
+require_once "../../scripts/connect.php";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $imie = $_POST['imie'];
-    $nazwisko = $_POST['nazwisko'];
+    $pracownikId = $_POST['pracownikId'];
     $data = $_POST['data'];
     $godziny = $_POST['godziny'];
     $komentarz = $_POST['komentarz'];
 
-    $sql = "INSERT INTO godziny_pracownikow (imie, nazwisko, data, godziny, komentarz) VALUES ('$imie', '$nazwisko', '$data', '$godziny', '$komentarz')";
+    $sql = "INSERT INTO godziny_pracownikow (Pracownik_Id, data, godziny, komentarz) VALUES ('$pracownikId', '$data', '$godziny', '$komentarz')";
 
     if ($conn->query($sql) === TRUE) {
         echo "Godziny pracownika zostały dodane.";
@@ -59,12 +50,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Starter Page</h1>
+                        <h1 class="m-0">Godziny pracowników</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Starter Page</li>
+                            <li class="breadcrumb-item active">Godziny pracowników</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -85,12 +76,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <div class="card-body">
                                 <form action="" method="post">
                                     <div class="form-group">
-                                        <label for="imie">Imię:</label>
-                                        <input type="text" class="form-control" id="imie" name="imie">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="nazwisko">Nazwisko:</label>
-                                        <input type="text" class="form-control" id="nazwisko" name="nazwisko">
+                                        <label for="pracownik">Pracownik:</label>
+                                        <select type="text" class="form-control" id="pracownikId" name="pracownikId">
+                                            <option></option>
+                                            <?php
+	                                            require_once "../../scripts/connect.php";
+                                                $sql = "SELECT id, imie, nazwisko FROM pracownicy;";
+                                                $result = $conn->query($sql);
+                                                while ($pracownicy = $result->fetch_assoc()){
+                                                    echo "<option value='$pracownicy[id]'>$pracownicy[imie] $pracownicy[nazwisko]</option>";
+                                                }
+	                                        ?>
+                                        </select>
                                     </div>
                                     <div class="form-group">
                                         <label for="data">Data:</label>
@@ -107,36 +104,49 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <button type="submit" class="btn btn-primary">Dodaj</button>
                                 </form>
 
-                                <h2>Tabela z dodanymi godzinami</h2>
-                                <table>
-                                    <tr>
-                                        <th>Imię</th>
-                                        <th>Nazwisko</th>
-                                        <th>Data</th>
-                                        <th>Godziny</th>
-                                        <th>Komentarz</th>
-                                    </tr>
-                                    <?php
-                                    if ($result->num_rows > 0) {
-                                        while ($row = $result->fetch_assoc()) {
-                                            echo "<tr>";
-                                            echo "<td>".$row['imie']."</td>";
-                                            echo "<td>".$row['nazwisko']."</td>";
-                                            echo "<td>".$row['data']."</td>";
-                                            echo "<td>".$row['godziny']."</td>";
-                                            echo "<td>".$row['komentarz']."</td>";
-                                            echo "</tr>";
-                                        }
-                                    } else {
-                                        echo "<tr><td colspan='5'>Brak danych</td></tr>";
-                                    }
-                                    ?>
-                                </table>
-<?php
-$conn->close();
-?>
+                                
+
+                            </div>
+                            <br><br>
+                            <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Tabela z dodanymi godzinami</h3>
                             </div>
                             <!-- /.card-body -->
+                                <div class="card-body">
+                                <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                  <tr>
+                                    <th class="col-3">Imie i Nazwisko</th>
+                                    <th class="col-1">Data</th>
+                                    <th class="col-1">Godziny</th>
+                                    <th class="col-6">Komentarz</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <?php
+                                  require_once "../../scripts/connect.php";
+                                  $sql = "SELECT g.Id, p.Imie, p.Nazwisko, g.Data, g.Godziny, g.Komentarz FROM `godziny_pracownikow` g
+                                  LEFT JOIN `pracownicy` p on p.Id = g.Pracownik_Id;";
+                                  $result = $conn->query($sql);
+                                  while ($wartosc = $result->fetch_assoc()) {
+                                    echo <<< TABELA
+                                    <tr>
+                                        <td>$wartosc[Imie] $wartosc[Nazwisko]</td>
+                                        <td>$wartosc[Data]</td>
+                                        <td>$wartosc[Godziny]</td>
+                                        <td>$wartosc[Komentarz]</td>
+                                    </tr>
+                                    TABELA;
+                                  }
+                                  ?>
+                                <tbody>
+                                </table>
+                                </div>
                         </div>
                         <!-- /.card -->
                     </div>
@@ -149,7 +159,9 @@ $conn->close();
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-
+    <?php
+$conn->close();
+?>
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
         <!-- Control sidebar content goes here -->
