@@ -42,13 +42,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (isset($_SESSION["username"])) {
                 switch ($_SESSION["rola_nazwa"]) {
                     case 'Administrator systemu':
-                        header("Location: Admin.html");
+                        header("Location: pulpit.php");
                         exit();
                     case 'Kierownik':
-                        header("Location: Employee.html");
+                        header("Location: pulpit.php");
                         exit();
                     case 'Pracownik':
-                        header("Location: User.html");
+                        header("Location: pulpit.php");
                         exit();
                     default:
                         $error = "Nieprawidłowy login lub hasło.";
@@ -106,10 +106,10 @@ ERROR;
     <?php if (isset($error)) echo "<p>$error</p>"; ?>
     <div class="card card-outline card-primary">
         <div class="card-header text-center">
-            <a href="../../index2.html" class="h1"><b>Admin</b>LTE</a>
+            <span class="h1"><b>Szpaki</b> i Tupaki</span>
         </div>
         <div class="card-body">
-            <p class="login-box-msg">Sign in to start your session</p>
+            <p class="login-box-msg">Zaloguj się</p>
 
             <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                 <div class="input-group mb-3">
@@ -121,7 +121,7 @@ ERROR;
                     </div>
                 </div>
                 <div class="input-group mb-3">
-                    <input type="password" class="form-control" placeholder="Password" name="password" id="password" required>
+                    <input type="password" class="form-control" placeholder="Hasło" name="password" id="password" required>
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-lock"></span>
@@ -133,23 +133,23 @@ ERROR;
                         <div class="icheck-primary">
                             <input type="checkbox" id="remember">
                             <label for="remember">
-                                Remember Me
+                                Zapamiętaj
                             </label>
                         </div>
                     </div>
                     <!-- /.col -->
                     <div class="col-4">
-                        <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                        <button type="submit" class="btn btn-primary btn-block">Zaloguj</button>
                     </div>
                     <!-- /.col -->
                 </div>
             </form>
 
             <p class="mb-1">
-                <a href="forgot-password.php">I forgot my password</a>
+                <a href="forgot-password.php">Zapomniałem hasła</a>
             </p>
             <p class="mb-0">
-                <a href="register.php" class="text-center">Register a new membership</a>
+                <a href="register.php" class="text-center">Zarejestruj nowego użytkownika</a>
             </p>
         </div>
         <!-- /.card-body -->

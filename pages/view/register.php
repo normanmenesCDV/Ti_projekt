@@ -33,10 +33,10 @@ ERROR;
   ?>
   <div class="card card-outline card-primary">
     <div class="card-header text-center">
-      <a href="./" class="h1"><b>Admin</b>LTE</a>
+      <span class="h1"><b>Szpaki</b> i Tupaki</span>
     </div>
     <div class="card-body">
-      <p class="login-box-msg">Register a new membership</p>
+      <p class="login-box-msg">Zarejestruj nowego użytkownika</p>
 
       <form action="../../scripts/register_user.php" method="post">
           <div class="input-group mb-3">
@@ -48,7 +48,7 @@ ERROR;
               </div>
           </div>
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Podaj imię" name="Imie" autofocus>
+          <input type="text" class="form-control" placeholder="Podaj Imię" name="Imie" autofocus>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
@@ -57,7 +57,7 @@ ERROR;
         </div>
 
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Podaj nazwisko" name="Nazwisko" autofocus>
+          <input type="text" class="form-control" placeholder="Podaj Nazwisko" name="Nazwisko" autofocus>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
@@ -66,7 +66,7 @@ ERROR;
         </div>
 
         <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="Podaj email" name="Mail">
+          <input type="email" class="form-control" placeholder="Podaj Email" name="Mail">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -75,7 +75,7 @@ ERROR;
         </div>
 
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Podaj hasło" name="Haslo">
+          <input type="password" class="form-control" placeholder="Podaj Hasło" name="Haslo">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -88,19 +88,19 @@ ERROR;
             <div class="icheck-primary">
               <input type="checkbox" id="agreeTerms" name="terms" value="agree">
               <label for="agreeTerms">
-               I agree to the <a href="#">terms</a>
+               Akceptuję <a href="#">warunki</a>
               </label>
             </div>
           </div>
           <!-- /.col -->
           <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block">Register</button>
+            <button type="submit" class="btn btn-primary btn-block">OK</button>
           </div>
           <!-- /.col -->
         </div>
       </form>
 
-      <a href="Login_page.php" class="text-center">I already have a membership</a>
+      <a href="Login_page.php" class="text-center">Mam już konto!</a>
     </div>
     <!-- /.form-box -->
   </div><!-- /.card -->
